@@ -84,6 +84,30 @@ def evaluate_model_task(model, X_test, y_test):
     evaluate_model(model, X_test, y_test)
 
 
+@task(name="fetch_project")
+def fetch_project_task():
+    """Récupère la dernière version du projet depuis le repo git."""
+    run_cmd(["git", "pull", "origin", "main"])
+
+
+@task(name="predict_task")
+def predict_task(model, X_test):
+    """Prédit la classe des 5 premiers clients du jeu de test."""
+    print("Prédiction...")
+    preds = model.predict(X_test[:5])
+    print("Prédictions :", preds)
+    return preds
+
+
+@flow(name="predict")
+def predict_flow():
+    """Charge le modèle et prédit sur quelques échantillons."""
+    data = prepare_data_task()
+    _, X_test, _, _, _ = data
+    model = load_model_task()
+    predict_task(model, X_test)
+
+
 @flow(name="install")
 def install_flow():
     install_task()
@@ -100,6 +124,7 @@ def code_flow():
 
 @flow(name="all")
 def all_flow():
+    fetch_project_task()
     install_task()
     format_task()
     quality_task()
@@ -129,7 +154,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--flow",
-        choices=["all", "train", "entrainement", "evaluate", "code", "install"],
+        choices=["all", "train", "entrainement", "evaluate", "code", "install", "predict"],
         required=True,
     )
     args = parser.parse_args()
@@ -144,3 +169,5 @@ if __name__ == "__main__":
         code_flow()
     elif args.flow == "install":
         install_flow()
+    elif args.flow == "predict":
+        predict_flow()
