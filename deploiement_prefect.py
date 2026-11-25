@@ -7,6 +7,7 @@ from pipeline_prefect import (
     code_flow,
     evaluate_flow,
     install_flow,
+    predict_flow,
     train_flow,
 )
 
@@ -24,6 +25,10 @@ if __name__ == "__main__":
         evaluate_flow.to_deployment(
             name="ml-pipeline-evaluate",
             tags=["evaluation", "mlops"],
+        ),
+        predict_flow.to_deployment(
+            name="ml-pipeline-predict",
+            tags=["prediction", "mlops"],
         ),
         code_flow.to_deployment(
             name="ml-pipeline-code",

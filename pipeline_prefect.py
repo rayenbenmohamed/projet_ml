@@ -154,7 +154,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--flow",
-        choices=["all", "train", "entrainement", "evaluate", "code", "install", "predict"],
+        choices=[
+            "all",
+            "train",
+            "entrainement",
+            "evaluate",
+            "code",
+            "install",
+            "predict",
+        ],
         required=True,
     )
     args = parser.parse_args()
