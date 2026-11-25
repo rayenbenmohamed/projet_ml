@@ -1,3 +1,5 @@
+"""Point d'entrée en ligne de commande du projet ML."""
+
 import argparse
 
 from model_pipeline import (

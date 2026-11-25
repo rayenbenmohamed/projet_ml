@@ -29,7 +29,7 @@ def format_task():
 
 @task(name="code_quality")
 def quality_task():
-    run_cmd([sys.executable, "-m", "pylint", "--fail-under=7", *FILES])
+    run_cmd([sys.executable, "-m", "pylint", "--fail-under=9", *FILES])
 
 
 @task(name="code_security")

@@ -1,3 +1,5 @@
+"""Fonctions du pipeline ML : données, entraînement, évaluation."""
+
 # ==========================================
 # ATELIER 2 : MODULARISATION DU CODE
 # Fichier : model_pipeline.py
