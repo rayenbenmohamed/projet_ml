@@ -124,3 +124,5 @@ urllib3==2.8.0
 uvicorn==0.54.0
 websockets==17.4
 whenever==0.11.0
+coverage==7.17.5
+pytest-cov==7.1.0
